@@ -45,6 +45,144 @@ body {
   position: relative;
   animation: fadeIn 1s ease;
 }
+/* Hero layout for SCREEN 1 */
+.hero {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero-left {
+  flex: 1 1 58%;
+  text-align: left;
+}
+.hero-right {
+  flex: 0 0 38%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #f7d046, #f39c12);
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 30px;
+  margin: 6px 0 6px;
+  color: #222;
+}
+.lead {
+  margin-top: 8px;
+  opacity: 0.9;
+  color: #4a4a4a;
+  line-height: 1.45;
+}
+.actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.btn.primary {
+  background: linear-gradient(135deg, #f7d046, #f39c12);
+  color: #111;
+  box-shadow: 0 8px 18px rgba(243, 156, 18, 0.18);
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(43, 43, 43, 0.07);
+  color: #333;
+  box-shadow: none;
+}
+.hero-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Stickers (decorative) */
+.stickers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 12;
+}
+.sticker {
+  position: absolute;
+  font-size: 28px;
+  transform-origin: center;
+  opacity: 0.98;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+  animation: stickerFloat 4200ms ease-in-out infinite;
+}
+.sticker.s1 {
+  left: -10px;
+  top: 18px;
+  transform: rotate(-8deg);
+  animation-delay: 0ms;
+}
+.sticker.s2 {
+  right: -6px;
+  top: 6px;
+  font-size: 34px;
+  transform: rotate(6deg);
+  animation-delay: 360ms;
+}
+.sticker.s3 {
+  left: 16px;
+  bottom: -10px;
+  font-size: 30px;
+  transform: rotate(-14deg);
+  animation-delay: 720ms;
+}
+.sticker.s4 {
+  right: 12px;
+  bottom: 6px;
+  font-size: 24px;
+  transform: rotate(6deg);
+  animation-delay: 1080ms;
+}
+
+@keyframes stickerFloat {
+  0% {
+    transform: translateY(0) rotate(var(--r, 0deg)) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) rotate(calc(var(--r, 0deg) * -1)) scale(1.06);
+  }
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg)) scale(1);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-left {
+    width: 100%;
+  }
+  .hero-right {
+    margin-bottom: 8px;
+  }
+  .hero-img {
+    width: 120px;
+    height: 120px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
