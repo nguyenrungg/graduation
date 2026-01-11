@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Thiệp Mời Kỷ Yếu</title>
+  </head>
+  <body>
+    <script>
+      // light particles
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = 8 + Math.random() * 12 + "s";
+        p.style.opacity = Math.random();
+        document.body.appendChild(p);
+      }
+
+      // graduation hats
+      for (let i = 0; i < 14; i++) {
+        const h = document.createElement("div");
+        h.className = "hat";
+        h.innerHTML = "🎓";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.animationDuration = 10 + Math.random() * 15 + "s";
+        h.style.fontSize = 18 + Math.random() * 18 + "px";
+        document.body.appendChild(h);
+      }
+    </script>
+
+    <div class="balloon-layer"></div>
+
+    <!-- SCREEN 1 -->
+    <div class="container screen active" id="s1">
+      <h2>Thiệp Mời Kỷ Yếu</h2>
+      <p style="margin-top: 10px; opacity: 0.85">
+        Một lời mời trang trọng dành riêng cho bạn
+      </p>
+      <button class="btn" onclick="go(1,2)">MỞ THIỆP</button>
+    </div>
+
+    <!-- SCREEN 2 -->
+    <div class="container screen" id="s2">
+      <h3>Thông tin người nhận</h3>
+      <input id="guest" placeholder="Tên người nhận" />
+      <button class="btn" onclick="openInvite()">XEM THIỆP</button>
+    </div>
+
+    <!-- SCREEN 3 -->
+    <div class="container screen" id="s3">
+      <div style="font-size: 13px; letter-spacing: 2px; opacity: 0.8">
+        YOU ARE INVITED
+      </div>
+      <div
+        style="font-size: 34px; font-weight: 800; margin: 6px 0; color: #2b2b2b"
+      >
+        GRADUATION
+      </div>
+      <div
+        style="
+          font-size: 40px;
+          font-family: cursive;
+          color: #d4a017;
+          margin-bottom: 16px;
+        "
+      >
+        Party
+      </div>
+      <img
+        src="https://via.placeholder.com/120"
+        class="logo"
+        alt="Logo trường"
+      />
+      <h3>Trân trọng kính mời</h3>
+      <div class="invite-name" id="guestName"></div>
+
+      <div class="invite-poem">
+        Kính mời quý khách ghé thăm,<br />
+        Chung vui ngày hội – tháng năm rạng ngời.<br />
+        Lời mời xin gửi trao người,<br />
+        Cùng nhau lưu giữ một thời thanh xuân.
+      </div>
+
+      <div class="timeline date-box">
+        <div class="date-row">
+          <div class="date-col small">JULY</div>
+        </div>
+        <div class="date-main">
+          <div class="date-col">SUNDAY</div>
+          <div class="date-number">12</div>
+          <div class="date-col">10:00 PM</div>
+        </div>
+        <div class="date-row">
+          <div class="date-col small">2026</div>
+        </div>
+      </div>
+
+      <div class="invite-address">
+        📍 <b>Địa điểm:</b> Hội trường Trường THPT ABC<br />
+        🏫 123 Đường Kỷ Niệm, Quận Thanh Xuân, TP. Hà Nội
+      </div>
+    </div>
+
+    <script>
+      //
+      const balloonLayer = document.querySelector(".balloon-layer");
+
+      for (let i = 0; i < 12; i++) {
+        const balloon = document.createElement("div");
+        balloon.className = "balloon";
+
+        balloon.style.left = Math.random() * 100 + "vw";
+        balloon.style.animationDuration = 25 + Math.random() * 20 + "s";
+
+        const size = 32 + Math.random() * 16;
+        balloon.style.width = size + "px";
+        balloon.style.height = size * 1.3 + "px";
+
+        balloonLayer.appendChild(balloon);
+      }
+      //
+      function go(a, b) {
+        document.getElementById("s" + a).classList.remove("active");
+        document.getElementById("s" + b).classList.add("active");
+      }
+
+      function openInvite() {
+        const g = document.getElementById("guest").value.trim();
+        if (!g) {
+          alert("Vui lòng nhập tên người nhận");
+          return;
+        }
+        document.getElementById("guestName").innerText = g;
+        go(2, 3);
+      }
+    </script>
+  </body>
+</html>
