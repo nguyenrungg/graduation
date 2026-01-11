@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Thiệp Mời Kỷ Yếu</title>
   </head>
   <body>
@@ -67,9 +71,39 @@
 
     <!-- SCREEN 2 -->
     <div class="container screen" id="s2">
-      <h3>Thông tin người nhận</h3>
-      <input id="guest" placeholder="Tên người nhận" />
-      <button class="btn" onclick="openInvite()">XEM THIỆP</button>
+      <div class="screen-2-grid">
+        <div class="s2-left">
+          <div class="s2-pre">Thông tin người nhận</div>
+          <h2 class="s2-title">Gửi tới</h2>
+
+          <div class="field">
+            <input id="guest" autocomplete="off" placeholder=" " />
+            <label for="guest">Tên người nhận</label>
+          </div>
+
+          <p class="muted">
+            Nhập tên để cá nhân hoá thiệp — phong cách trang nhã, hiện đại.
+          </p>
+
+          <div class="s2-actions">
+            <button class="btn primary" onclick="openInvite()">
+              XEM THIỆP
+            </button>
+            <button class="btn ghost" onclick="go(2,1)">QUAY LẠI</button>
+          </div>
+        </div>
+
+        <div class="s2-right">
+          <div class="preview-card" id="previewCard" aria-hidden="true">
+            <div class="preview-top">YOU ARE INVITED</div>
+            <div class="preview-main">GRADUATION</div>
+            <div class="preview-name" id="previewName">
+              — Tên sẽ hiển thị ở đây —
+            </div>
+            <div class="preview-footer">JUL 12 · 2026 · 10:00 PM</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- SCREEN 3 -->
@@ -144,7 +178,23 @@
 
         balloonLayer.appendChild(balloon);
       }
-      //
+      // live preview: update preview card as user types
+      const guestInput = document.getElementById("guest");
+      const previewName = document.getElementById("previewName");
+      const previewCard = document.getElementById("previewCard");
+      if (guestInput && previewName) {
+        guestInput.addEventListener("input", (e) => {
+          const v = e.target.value.trim();
+          previewName.innerText = v ? v : "— Tên sẽ hiển thị ở đây —";
+          // subtle pulse when typing
+          if (previewCard) {
+            previewCard.classList.remove("pulse");
+            void previewCard.offsetWidth;
+            previewCard.classList.add("pulse");
+          }
+        });
+      }
+
       function go(a, b) {
         document.getElementById("s" + a).classList.remove("active");
         document.getElementById("s" + b).classList.add("active");
@@ -156,8 +206,18 @@
           alert("Vui lòng nhập tên người nhận");
           return;
         }
-        document.getElementById("guestName").innerText = g;
-        go(2, 3);
+
+        // animate preview -> then open screen 3
+        const previewCard = document.getElementById("previewCard");
+        if (previewCard) {
+          previewCard.classList.add("reveal-to-invite");
+        }
+
+        setTimeout(() => {
+          document.getElementById("guestName").innerText = g;
+          go(2, 3);
+          if (previewCard) previewCard.classList.remove("reveal-to-invite");
+        }, 620);
       }
     </script>
   </body>
